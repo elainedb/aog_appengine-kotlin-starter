@@ -1,5 +1,4 @@
 import java.io.IOException
-import java.util.HashMap
 import java.util.concurrent.ExecutionException
 import java.util.stream.Collectors
 import javax.servlet.annotation.WebServlet
@@ -32,7 +31,6 @@ class ActionsServlet : HttpServlet() {
         } catch (e: ExecutionException) {
             handleError(res, e)
         }
-
     }
 
     @Throws(IOException::class)
@@ -51,7 +49,6 @@ class ActionsServlet : HttpServlet() {
         } catch (e: IOException) {
             e.printStackTrace()
         }
-
     }
 
     private fun handleError(res: HttpServletResponse, throwable: Throwable) {
@@ -62,11 +59,10 @@ class ActionsServlet : HttpServlet() {
         } catch (e: IOException) {
             e.printStackTrace()
         }
-
     }
 
     private fun getHeadersMap(request: HttpServletRequest): Map<String, String> {
-        val map = HashMap<String, String>()
+        val map = mutableMapOf<String, String>()
 
         val headerNames = request.headerNames
         while (headerNames.hasMoreElements()) {
@@ -80,5 +76,4 @@ class ActionsServlet : HttpServlet() {
     companion object {
         private val LOG = LoggerFactory.getLogger(MyActionsApp::class.java)
     }
-
 }
