@@ -1,15 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-//val kotlinVersion = ext.get("kotlin_version") as String
-//val kotlinVersion by extra("1.3.21")
-//val kotlinVersion: String by project // from gradle.properties
-
 buildscript {
-//    extra.apply{
-//        set("kotlin_version", "1.3.21")
-//    }
-
-//    val kotlinVersion by rootProject.extra("1.3.21")
     val kotlinVersion: String by project // from gradle.properties
 
     repositories {
