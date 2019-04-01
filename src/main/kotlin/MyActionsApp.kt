@@ -12,19 +12,16 @@ import java.util.*
  */
 class MyActionsApp : DialogflowApp() {
 
-    companion object {
-        private val LOGGER = LoggerFactory.getLogger(MyActionsApp::class.java)
-    }
+    private val LOGGER = LoggerFactory.getLogger(MyActionsApp::class.java)
 
     @ForIntent("Default Welcome Intent")
     fun welcome(request: ActionRequest): ActionResponse {
         LOGGER.info("Welcome intent start.")
         val responseBuilder = getResponseBuilder(request)
-        val rb = ResourceBundle.getBundle("resources")
         if (request.user?.lastSeen != null) {
-            responseBuilder.add(rb.getFormattedString("welcome_back"))
+            responseBuilder.add(getStringResource("welcome_back"))
         } else {
-            responseBuilder.add(rb.getFormattedString("welcome"))
+            responseBuilder.add(getStringResource("welcome"))
         }
 
         LOGGER.info("Welcome intent end.")
@@ -35,10 +32,13 @@ class MyActionsApp : DialogflowApp() {
     fun bye(request: ActionRequest): ActionResponse {
         LOGGER.info("Bye intent start.")
         val responseBuilder = getResponseBuilder(request)
-        val rb = ResourceBundle.getBundle("resources")
 
-        responseBuilder.add(rb.getFormattedString("bye")).endConversation()
+        responseBuilder.add(getStringResource("bye")).endConversation()
         LOGGER.info("Bye intent end.")
         return responseBuilder.build()
+    }
+
+    private fun getStringResource(key: String): String {
+        return ResourceBundle.getBundle("resources").getFormattedString(key)
     }
 }
